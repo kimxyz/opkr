@@ -207,6 +207,24 @@ def wrong_car_mode_alert(CP: car.CarParams, sm: messaging.SubMaster, metric: boo
     text = "Main Switch Off"
   return NoEntryAlert(text, duration_hud_alert=0.)
 
+def standstill_alert(CP, sm, metric):
+  elapsed_time = sm['pathPlan'].standstillElapsedTime
+  elapsed_time_min = elapsed_time // 60
+  elapsed_time_sec = elapsed_time - (elapsed_time_min * 60)
+
+  if elapsed_time_min == 0:
+    return Alert(
+      "잠시 멈춤 (경과시간: %02d초)" % (elapsed_time_sec),
+      "",
+      AlertStatus.normal, AlertSize.small,
+      Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1, alert_rate=0.5)
+  else:
+    return Alert(
+      "잠시 멈춤 (경과시간: %d분 %02d초)" % (elapsed_time_min, elapsed_time_sec),
+      "",
+      AlertStatus.normal, AlertSize.small,
+      Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1, alert_rate=0.5)
+
 EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, bool], Alert]]]] = {
   # ********** events with no alerts **********
 
@@ -222,8 +240,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.startup: {
     ET.PERMANENT: Alert(
-      "G   E   N   E   S   I   S",
-      "The  Luxury  Dynamic  Driving",
+      "오픈파일럿 사용준비가 되었습니다",
+      "안전운전을 위해 항상 핸들을 잡고 도로교통 상황을 주시하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., 5.),
   },
@@ -447,7 +465,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.laneChangeManual: {
     ET.WARNING: Alert(
       "저속 방향지시등 작동 중",
-      "저속 조향 유지 중 ",
+      "자동조향이 일시 비활성화 됩니다 직접 조향하세요",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1, alert_rate=0.75),
   },
@@ -519,6 +537,9 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
       "추돌위험",
       AlertStatus.normal, AlertSize.full,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeWarning2Repeat, .1, .1, .1),
+  },
+  EventName.standStill: {
+    ET.WARNING: standstill_alert,
   },
 
   # ********** events that affect controls state transitions **********
@@ -743,12 +764,12 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.reverseGear: {
     ET.PERMANENT: Alert(
-      "GENESIS",
+      "후진 기어",
       "",
       AlertStatus.normal, AlertSize.full,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=0.5),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("GENESIS"),
-    ET.NO_ENTRY: NoEntryAlert("GENESIS"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("후진 기어"),
+    ET.NO_ENTRY: NoEntryAlert("후진 기어"),
   },
 
   EventName.cruiseDisabled: {
@@ -756,7 +777,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   },
 
   EventName.plannerError: {
-    ET.SOFT_DISABLE: SoftDisableAlert("Planner Solution Error"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Planner Solution Error"),
     ET.NO_ENTRY: NoEntryAlert("Planner Solution Error"),
   },
 
