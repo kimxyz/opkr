@@ -140,7 +140,7 @@ class Spdctrl(SpdController):
                 lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 5, 5)
             elif lead_objspd >= 0 and CS.clu_Vanz >= (int(CS.VSetDis) - 5) and int(CS.clu_Vanz * 0.5) < dRel:
                 self.seq_step_debug = "SS>VS,+1"
-                lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 75, 3)
+                lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 75, 5)
             elif CS.clu_Vanz > 50 and lead_objspd < 0 and int(CS.clu_Vanz * 0.3) > dRel:
                 self.seq_step_debug = "SS>VS,-1"
                 lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 100, -3)
@@ -148,7 +148,7 @@ class Spdctrl(SpdController):
                 self.seq_step_debug = "SS>VS,거리유지"
         elif lead_objspd >= 0 and CS.clu_Vanz >= (int(CS.VSetDis) - 5) and int(CS.clu_Vanz * 0.5) < dRel:
             self.seq_step_debug = "일반가속"
-            lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 150, 4)
+            lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 150, 5)
         elif lead_objspd < 0 and int(CS.clu_Vanz * 0.3) > dRel:
             self.seq_step_debug = "일반감속"
             lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 100, -3)
