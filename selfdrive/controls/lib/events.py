@@ -240,8 +240,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.startup: {
     ET.PERMANENT: Alert(
-      "오픈파일럿 사용준비가 되었습니다",
-      "안전운전을 위해 항상 핸들을 잡고 도로교통 상황을 주시하세요",
+      "G  E  N  E  S  I  S",
+      "The  Luxury  Dynamic  Driving",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., 5.),
   },
@@ -764,12 +764,12 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.reverseGear: {
     ET.PERMANENT: Alert(
-      "후진 기어",
+      "GENESIS",
       "",
       AlertStatus.normal, AlertSize.full,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=0.5),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("후진 기어"),
-    ET.NO_ENTRY: NoEntryAlert("후진 기어"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("GENESIS"),
+    ET.NO_ENTRY: NoEntryAlert("GENESIS"),
   },
 
   EventName.cruiseDisabled: {
@@ -777,7 +777,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   },
 
   EventName.plannerError: {
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Planner Solution Error"),
+    ET.SOFT_DISABLE: SoftDisableAlert("Planner Solution Error"),
     ET.NO_ENTRY: NoEntryAlert("Planner Solution Error"),
   },
 
