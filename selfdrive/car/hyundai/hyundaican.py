@@ -49,7 +49,7 @@ def create_lkas11(packer, frame, car_fingerprint, apply_steer, steer_req,
   elif car_fingerprint in [CAR.OPTIMA, CAR.OPTIMA_HEV, CAR.CADENZA, CAR.CADENZA_HEV]:
     values["CF_Lkas_LdwsActivemode"] = 0
 
-  elif car_fingerprint == CAR.SONATA_LF_TURBO:
+  elif car_fingerprint == CAR.GENESIS:
     values["CF_Lkas_Bca_R"] = 0
     values["CF_Lkas_FcwOpt_USM"] = 2 if enabled else 1
     values["CF_Lkas_LdwsOpt_USM"] = 2
