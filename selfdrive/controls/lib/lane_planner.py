@@ -30,9 +30,9 @@ class LanePlanner:
     self.p_poly = [0., 0., 0., 0.]
     self.d_poly = [0., 0., 0., 0.]
 
-    self.lane_width_estimate = 3.5
+    self.lane_width_estimate = 3.7
     self.lane_width_certainty = 1.0
-    self.lane_width = 3.5
+    self.lane_width = 3.7
 
     self.l_prob = 0.
     self.r_prob = 0.
@@ -139,7 +139,7 @@ class LanePlanner:
     self.lane_width_certainty += 0.05 * (l_prob * r_prob - self.lane_width_certainty)
     current_lane_width = abs(self.l_poly[3] - self.r_poly[3])
     self.lane_width_estimate += 0.005 * (current_lane_width - self.lane_width_estimate)
-    speed_lane_width = interp(v_ego, [0., 31.], [2.7, 3.6])
+    speed_lane_width = interp(v_ego, [0., 31.], [2.8, 3.5])
     self.lane_width = self.lane_width_certainty * self.lane_width_estimate + \
                       (1 - self.lane_width_certainty) * speed_lane_width
 
@@ -152,10 +152,10 @@ class LanePlanner:
     lr_prob = l_prob + r_prob - l_prob * r_prob
     
     # neokii #1
-    #if lr_prob > 0.65:
-    #  lr_prob = min(lr_prob * 1.35, 1.0) 
-    #elif lr_prob > 0.4:
-    #  lr_prob = min(lr_prob * 1.5, 0.93)  
+    if lr_prob > 0.65:
+      lr_prob = min(lr_prob * 1.35, 1.0) 
+    elif lr_prob > 0.4:
+      lr_prob = min(lr_prob * 1.5, 0.93)  
 
     d_poly_lane = (l_prob * path_from_left_lane + r_prob * path_from_right_lane) / (l_prob + r_prob + 0.0001)
     self.d_poly = lr_prob * d_poly_lane + (1.0 - lr_prob) * self.p_poly.copy()
