@@ -214,13 +214,13 @@ def standstill_alert(CP, sm, metric):
 
   if elapsed_time_min == 0:
     return Alert(
-      "잠시 멈춤 (경과시간: %02d초)" % (elapsed_time_sec),
+      "신호 대기 (경과시간: %02d초)" % (elapsed_time_sec),
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1, alert_rate=0.5)
   else:
     return Alert(
-      "잠시 멈춤 (경과시간: %d분 %02d초)" % (elapsed_time_min, elapsed_time_sec),
+      "신호  (경과시간: %d분 %02d초)" % (elapsed_time_min, elapsed_time_sec),
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1, alert_rate=0.5)
@@ -465,7 +465,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.laneChangeManual: {
     ET.WARNING: Alert(
       "저속 방향지시등 작동 중",
-      "자동조향이 일시 비활성화 됩니다 직접 조향하세요",
+      "저속 조향 유지 중",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1, alert_rate=0.75),
   },
