@@ -15,7 +15,7 @@ EventName = car.CarEvent.EventName
 class Spdctrl(SpdController):
     def __init__(self, CP=None):
         super().__init__( CP )
-        self.cv_Raio = 0.3
+        self.cv_Raio = 0.2
         self.cv_Dist = -5
         self.steer_mode = ""
         self.cruise_gap = 0.0
@@ -53,7 +53,7 @@ class Spdctrl(SpdController):
             vRel2 = int(vRelef) # for cut-in detection??
 
         dst_lead_distance = int(CS.clu_Vanz*self.cv_Raio)   # 기준 유지 거리
-        dst_lead_distance2 = int(CS.clu_Vanz*0.3)   # 기준 유지 거리
+        dst_lead_distance2 = int(CS.clu_Vanz*0.2)   # 기준 유지 거리
         
         if dst_lead_distance > 100:
             dst_lead_distance = 100
