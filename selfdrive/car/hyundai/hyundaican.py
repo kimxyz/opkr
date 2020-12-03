@@ -58,12 +58,12 @@ def create_lkas11(packer, frame, car_fingerprint, apply_steer, steer_req,
     
   ldws_car_fix = int(Params().get('LdwsCarFix')) == "1"
   if ldws_car_fix:
-  	    values["CF_Lkas_Bca_R"] = 0
         values["CF_Lkas_FcwOpt_USM"] = 1
         values["CF_Lkas_LdwsOpt_USM"] = 3
         values["CF_Lkas_FcwOpt_USM"] = 2
         values["CF_Lkas_LdwsOpt_USM"] = 2
-    
+        values["CF_Lkas_Bca_R"] = 0
+        
   dat = packer.make_can_msg("LKAS11", 0, values)[2]
 
   if car_fingerprint in CHECKSUM["crc8"]:
