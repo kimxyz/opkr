@@ -131,13 +131,13 @@ class Spdctrl(SpdController):
         elif self.cruise_set_speed_kph > CS.clu_Vanz:  #이온설정속도가 차량속도보다 큰경우
             if lead_objspd > 5 and CS.clu_Vanz < 15 and CS.VSetDis < 40: # 처음출발시 선행차량 급가속할 때 차량속도 20되기 전 최대한 설정속도 업 한 후 대기
                 self.seq_step_debug = "SS>VS,초가"
-                lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 5, 5)
+                lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 10, 5)
             elif lead_objspd > 5 and CS.clu_Vanz > 40 and CS.VSetDis < 60: # 처음출발시 선행차량 급가속할 때 차량속도 20되기 전 최대한 설정속도 업 한 후 대기
                 self.seq_step_debug = "SS>VS,중가"
-                lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 5, 4)
+                lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 7, 4)
             elif lead_objspd > 5 and CS.clu_Vanz > 60 and CS.VSetDis < 80: # 처음출발시 선행차량 급가속할 때 차량속도 20되기 전 최대한 설정속도 업 한 후 대기
                 self.seq_step_debug = "SS>VS,종가"
-                lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 5, 4)
+                lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 7, 4)
             elif lead_objspd >= 0 and CS.clu_Vanz >= (int(CS.VSetDis) - 5) and int(CS.clu_Vanz * 0.5) < dRel:
                 self.seq_step_debug = "SS>VS,+1"
                 lead_wait_cmd, lead_set_speed = self.get_tm_speed( CS, 75, 4)
