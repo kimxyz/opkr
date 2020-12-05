@@ -168,19 +168,19 @@ class Spdctrl(SpdController):
             if model_speed < 60 and CS.clu_Vanz > 40 and CS.lead_distance >= 10:
                 set_speed = self.cruise_set_speed_kph - int(CS.clu_Vanz * 0.25)
                 self.seq_step_debug = "커브감속-4"
-                wait_time_cmd = 50
+                wait_time_cmd = 40
             elif model_speed < 80 and CS.clu_Vanz > 40 and CS.lead_distance >= 10:
                 set_speed = self.cruise_set_speed_kph - int(CS.clu_Vanz * 0.20)
                 self.seq_step_debug = "커브감속-3"
-                wait_time_cmd = 60
+                wait_time_cmd = 50
             elif model_speed < 100 and CS.clu_Vanz > 40 and CS.lead_distance >= 10:
                 set_speed = self.cruise_set_speed_kph - int(CS.clu_Vanz * 0.15)
                 self.seq_step_debug = "커브감속-2"
-                wait_time_cmd = 70
+                wait_time_cmd = 60
             elif model_speed < 120 and CS.clu_Vanz > 40 and CS.lead_distance >= 10:
                 set_speed = self.cruise_set_speed_kph - int(CS.clu_Vanz * 0.10)
                 self.seq_step_debug = "커브감속-1"
-                wait_time_cmd = 80
+                wait_time_cmd = 70
 
         return wait_time_cmd, set_speed
 
