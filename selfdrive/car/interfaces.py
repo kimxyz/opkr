@@ -103,10 +103,10 @@ class CarInterfaceBase():
       events.add(EventName.espDisabled)
     #if cs_out.gasPressed:
     #  events.add(EventName.gasPressed)
-    if cs_out.stockFcw:
-      events.add(EventName.stockFcw)
-    if cs_out.stockAeb:
-      events.add(EventName.stockAeb)
+    #if cs_out.stockFcw:
+    #  events.add(EventName.stockFcw)
+    #if cs_out.stockAeb:
+    #  events.add(EventName.stockAeb)
     if cs_out.vEgo > MAX_CTRL_SPEED:
       events.add(EventName.speedTooHigh)
     if cs_out.cruiseState.nonAdaptive:
