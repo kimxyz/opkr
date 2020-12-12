@@ -8,7 +8,7 @@ ButtonCnt = 0
 LongPressed = False
 
 # kph
-V_CRUISE_MAX = 144
+V_CRUISE_MAX = 160
 V_CRUISE_MIN = 1
 V_CRUISE_DELTA_MI = 5 * CV.MPH_TO_KPH
 V_CRUISE_DELTA_KM = 10
